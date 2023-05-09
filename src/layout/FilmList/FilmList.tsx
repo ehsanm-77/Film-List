@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { films } from '../../service/api/axios/axios';
 import { FilmsList } from '../../components/cart/cart';
+import { Isubmit } from '../../types/types';
 
 export const FilmList = () => {
   const [filmList, setFilmList] = useState([]);
 
-  useEffect(() => {
-    fetchFilms();
-  }, []);
-
-  const fetchFilms = () => {
+  const fetchFilmsFromApi = () => {
     films
       .get('/films')
       .then((res) => {
@@ -20,9 +17,13 @@ export const FilmList = () => {
       });
   };
 
-  // const handleFilmAdded = (newFilm) => {
-  //   setFilmList((prevFilmList) => [...prevFilmList, newFilm]);
-  // };
+  useEffect(() => {
+    fetchFilmsFromApi(); // Call the renamed local function
+  }, []);
+
+  useEffect(() => {
+    fetchFilmsFromApi();
+  }, [filmList]);
 
   return (
     <div className="bg-[#595959] h-full">

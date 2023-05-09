@@ -1,14 +1,13 @@
 import { FilmForm, Header, FilmList } from './layout/index';
+import { Isubmit } from './types/types';
 
-function App() {
+function App({ fetchFilmsFromApi }: Isubmit) {
   return (
-    <>
-      <div className="w-full h-full">
-        <Header />
-        <FilmForm />
-        <FilmList />
-      </div>
-    </>
+    <div className="w-full h-full">
+      <Header />
+      <FilmForm fetchFilmsFromApi={fetchFilmsFromApi} />
+      <FilmList />
+    </div>
   );
 }
 

@@ -1,36 +1,28 @@
 {
   "films": [
     {
-      "name": "aa",
-      "director": "aa",
-      "genre": "اکشن/ماجراجویی",
-      "productionDate": "aa",
-      "description": "aa",
+      "name": "ش",
+      "director": "ش",
+      "genre": "",
+      "productionDate": "ش",
+      "description": "ش",
       "id": 1
     },
     {
-      "name": "Dolor voluptatibus e",
-      "director": "Dolores exercitation",
-      "genre": "اکشن/ماجراجویی",
-      "productionDate": "Do ipsum sit exercit",
-      "description": "Tenetur dignissimos ",
+      "name": "a",
+      "director": "aaaaaaaaax",
+      "genre": "",
+      "productionDate": "xx",
+      "description": "a",
       "id": 2
     },
     {
-      "name": "Deleniti voluptatem",
-      "director": "Fugiat aut omnis com",
-      "genre": "وحشت/هیجانی",
-      "productionDate": "Rerum minus ducimus",
-      "description": "Totam incidunt cons",
+      "name": "b",
+      "director": "b",
+      "genre": "",
+      "productionDate": "b",
+      "description": "b",
       "id": 3
-    },
-    {
-      "name": "Deserunt aute labori",
-      "director": "Aliqua Excepteur se",
-      "genre": "اکشن/ماجراجویی",
-      "productionDate": "Nulla cillum beatae ",
-      "description": "Sapiente rerum irure",
-      "id": 4
     }
   ]
 }

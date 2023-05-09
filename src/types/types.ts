@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 // Inputs (with type)
 export type Iinput = {
   label: string;
@@ -26,22 +24,6 @@ export interface SelectOptionProps {
 
 //..........//
 
-interface Film {
-  id: number;
-  name: string;
-  director: string;
-  genre: string;
-  productionDate: string;
-}
-
-export interface FilmsListProps {
-  filmList: Film[];
-}
-export type OnFilmAddedCallback = {
-  OnFilmAdded: (film: Film) => void;
-};
 export type Isubmit = {
-  e: React.FormEvent;
-  fetchFilms: () => void;
+  fetchFilmsFromApi: () => void;
 };
-export type FetchFilmsFn = () => Promise<AxiosResponse<Film[]>>;

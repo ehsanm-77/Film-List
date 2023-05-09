@@ -3,16 +3,15 @@ import { films } from '../../service/api/axios/axios';
 import { SelectOption, TextField } from '../../components';
 import { Isubmit } from '../../types/types';
 
-export const FilmForm = () => {
+export const FilmForm = ({ fetchFilmsFromApi }: Isubmit) => {
   // State variables for form inputs
   const [name, setName] = useState('');
   const [director, setDirector] = useState('');
   const [genre, setGenre] = useState('');
   const [productionDate, setProductionDate] = useState('');
   const [description, setDescription] = useState('');
-  const [filmList, setFilmList] = useState([]);
 
-  const handleSubmit = ({ e, fetchFilms }: Isubmit) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Create an object with the form data
     const formData = {
@@ -31,7 +30,7 @@ export const FilmForm = () => {
         // Handle successful response (e.g., show success message)
         console.log('Film successfully saved');
         // Fetch the updated film list
-        fetchFilms();
+        fetchFilmsFromApi();
         // Clear the form inputs
         setName('');
         setDirector('');
