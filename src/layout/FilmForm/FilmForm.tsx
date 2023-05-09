@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
 import { films } from '../../service/api/axios/axios';
 import { SelectOption, TextField } from '../../components';
-import { Isubmit } from '../../types/types';
+import { useState } from 'react';
 
-export const FilmForm = ({ fetchFilmsFromApi }: Isubmit) => {
+export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
   // State variables for form inputs
   const [name, setName] = useState('');
   const [director, setDirector] = useState('');
@@ -13,6 +12,7 @@ export const FilmForm = ({ fetchFilmsFromApi }: Isubmit) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     // Create an object with the form data
     const formData = {
       name,
@@ -27,11 +27,9 @@ export const FilmForm = ({ fetchFilmsFromApi }: Isubmit) => {
       .post('/films', formData)
       .then((response) => {
         console.log(response);
-        // Handle successful response (e.g., show success message)
         console.log('Film successfully saved');
-        // Fetch the updated film list
-        fetchFilmsFromApi();
-        // Clear the form inputs
+        handleSubmited(!isSubmited);
+        // Add the newly created film to the film list
         setName('');
         setDirector('');
         setGenre('');
@@ -43,6 +41,7 @@ export const FilmForm = ({ fetchFilmsFromApi }: Isubmit) => {
         console.error('Failed to save film:', error);
       });
   };
+
   return (
     <>
       <div className=" bg-[#515050]">

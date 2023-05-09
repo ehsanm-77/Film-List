@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import { FilmForm, Header, FilmList } from './layout/index';
-import { Isubmit } from './types/types';
 
-function App({ fetchFilmsFromApi }: Isubmit) {
+function App() {
+  const [isSubmited, setIsSubmited] = useState(false);
+  const handleSubmited = (boolean: boolean) => {
+    setIsSubmited(boolean);
+  };
   return (
-    <div className="w-full h-full">
-      <Header />
-      <FilmForm fetchFilmsFromApi={fetchFilmsFromApi} />
-      <FilmList />
-    </div>
+    <>
+      <div className="w-full h-full">
+        <Header />
+        <FilmForm handleSubmited={handleSubmited} isSubmited={isSubmited} />
+        <FilmList isSubmited={isSubmited} />
+      </div>
+    </>
   );
 }
 

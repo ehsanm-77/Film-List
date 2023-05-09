@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 // Inputs (with type)
 export type Iinput = {
   label: string;

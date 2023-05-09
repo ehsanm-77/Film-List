@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { films } from '../../service/api/axios/axios';
 import { FilmsList } from '../../components/cart/cart';
-import { Isubmit } from '../../types/types';
 
-export const FilmList = () => {
+export const FilmList = ({ isSubmited }: any) => {
   const [filmList, setFilmList] = useState([]);
 
   const fetchFilmsFromApi = () => {
     films
       .get('/films')
       .then((res) => {
+        console.log(res.data);
         setFilmList(res.data);
       })
       .catch((error) => {
         console.error('Failed to fetch films:', error);
       });
   };
-
-  useEffect(() => {
-    fetchFilmsFromApi(); // Call the renamed local function
-  }, []);
-
+  console.log(filmList);
   useEffect(() => {
     fetchFilmsFromApi();
-  }, [filmList]);
+  }, [isSubmited]);
 
   return (
     <div className="bg-[#595959] h-full">
