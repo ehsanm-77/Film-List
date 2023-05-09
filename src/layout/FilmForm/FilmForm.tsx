@@ -41,6 +41,13 @@ export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
         console.error('Failed to save film:', error);
       });
   };
+  const handleReset = () => {
+    setName('');
+    setDirector('');
+    setGenre('');
+    setProductionDate('');
+    setDescription('');
+  };
 
   return (
     <>
@@ -94,6 +101,7 @@ export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
                   ذخیره
                 </button>
                 <button
+                  onClick={handleReset}
                   type="reset"
                   className="py-1 px-7 border rounded-md text-white"
                 >

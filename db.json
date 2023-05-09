@@ -1,84 +1,32 @@
 {
   "films": [
     {
-      "name": "aa",
-      "director": "aa",
-      "genre": "",
-      "productionDate": "aa",
-      "description": "aa",
+      "name": "Updated Name",
       "id": 1
     },
     {
-      "name": "bb",
-      "director": "bb",
-      "genre": "",
-      "productionDate": "bb",
-      "description": "bb",
+      "name": "v",
+      "director": "v",
+      "genre": "درام/فانتزی",
+      "productionDate": "v",
+      "description": "v",
       "id": 2
     },
     {
-      "name": "nn",
-      "director": "nn",
+      "name": "",
+      "director": "",
       "genre": "",
-      "productionDate": "nn",
-      "description": "nn",
+      "productionDate": "",
+      "description": "",
       "id": 3
     },
     {
-      "name": "ff",
-      "director": "ff",
+      "name": "",
+      "director": "",
       "genre": "",
-      "productionDate": "ff",
-      "description": "ff",
+      "productionDate": "",
+      "description": "",
       "id": 4
-    },
-    {
-      "name": "hh",
-      "director": "hh",
-      "genre": "",
-      "productionDate": "hh",
-      "description": "hh",
-      "id": 5
-    },
-    {
-      "name": "jj",
-      "director": "jj",
-      "genre": "",
-      "productionDate": "jj",
-      "description": "jj",
-      "id": 6
-    },
-    {
-      "name": "ll",
-      "director": "ll",
-      "genre": "",
-      "productionDate": "ll",
-      "description": "ll",
-      "id": 7
-    },
-    {
-      "name": "mm",
-      "director": "mm",
-      "genre": "",
-      "productionDate": "mm",
-      "description": "mm",
-      "id": 8
-    },
-    {
-      "name": "gg",
-      "director": "gg",
-      "genre": "",
-      "productionDate": "gg",
-      "description": "gg",
-      "id": 9
-    },
-    {
-      "name": "qq",
-      "director": "qq",
-      "genre": "",
-      "productionDate": "qq",
-      "description": "qq",
-      "id": 10
     }
   ]
 }

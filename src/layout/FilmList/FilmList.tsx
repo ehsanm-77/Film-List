@@ -4,7 +4,6 @@ import { FilmsList } from '../../components/cart/cart';
 
 export const FilmList = ({ isSubmited }: any) => {
   const [filmList, setFilmList] = useState([]);
-
   const fetchFilmsFromApi = () => {
     films
       .get('/films')
@@ -20,6 +19,41 @@ export const FilmList = ({ isSubmited }: any) => {
   useEffect(() => {
     fetchFilmsFromApi();
   }, [isSubmited]);
+
+  const handleDelete = (filmId: any) => {
+    films
+      .delete(`/films/${filmId}`)
+      .then((res) => {
+        console.log(res);
+        // Remove the deleted film from the film list
+        setFilmList((prevList) =>
+          prevList.filter((film) => film.id !== filmId)
+        );
+      })
+      .catch((error) => {
+        console.error('Failed to delete film:', error);
+      });
+  };
+
+  const handleEdit = (filmId: any, updatedData: any) => {
+    films
+      .put(`/films/${filmId}`, updatedData)
+      .then((res) => {
+        console.log(res);
+        // Update the film in the film list
+        setFilmList((prevList: any) =>
+          prevList.map((film: any) => {
+            if (film.id === filmId) {
+              return { ...film, ...updatedData };
+            }
+            return film;
+          })
+        );
+      })
+      .catch((error) => {
+        console.error('Failed to edit film:', error);
+      });
+  };
 
   return (
     <div className="bg-[#595959] h-full">
@@ -39,7 +73,11 @@ export const FilmList = ({ isSubmited }: any) => {
           <div className="text-center">حذف</div>
         </div>
         <div className="flex justify-center mt-3 h-[2px] bg-white"></div>
-        <FilmsList filmList={filmList} />
+        <FilmsList
+          filmList={filmList}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
       </div>
     </div>
   );

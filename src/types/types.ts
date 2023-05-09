@@ -29,3 +29,17 @@ export interface SelectOptionProps {
 export type Isubmit = {
   fetchFilmsFromApi: () => void;
 };
+export interface Film {
+  id: string;
+  name: string;
+  director: string;
+  genre: string;
+  productionDate: string;
+  description: string;
+}
+
+export interface FilmsListProps {
+  filmList: Film[];
+  handleEdit: (filmId: string, updatedData: Partial<Film>) => void;
+  handleDelete: (filmId: string) => void;
+}
