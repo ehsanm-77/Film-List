@@ -1,46 +1,22 @@
-import { films } from '../../service/api/axios/axios';
+import { films } from '../../library/axios/axios';
 import { SelectOption, TextField } from '../../components';
-import { useState } from 'react';
 
-export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
+export const FilmForm = ({
+  name,
+  director,
+  genre,
+  productionDate,
+  description,
+  setName,
+  setDirector,
+  setGenre,
+  setProductionDate,
+  setDescription,
+  isEditing,
+  handleSubmit,
+}: any) => {
   // State variables for form inputs
-  const [name, setName] = useState('');
-  const [director, setDirector] = useState('');
-  const [genre, setGenre] = useState('');
-  const [productionDate, setProductionDate] = useState('');
-  const [description, setDescription] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Create an object with the form data
-    const formData = {
-      name,
-      director,
-      genre,
-      productionDate,
-      description,
-    };
-
-    // Send a POST request to the /films endpoint with the form data
-    films
-      .post('/films', formData)
-      .then((response) => {
-        console.log(response);
-        console.log('Film successfully saved');
-        handleSubmited(!isSubmited);
-        // Add the newly created film to the film list
-        setName('');
-        setDirector('');
-        setGenre('');
-        setProductionDate('');
-        setDescription('');
-      })
-      .catch((error) => {
-        // Handle error (e.g., show error message)
-        console.error('Failed to save film:', error);
-      });
-  };
   const handleReset = () => {
     setName('');
     setDirector('');
@@ -72,7 +48,12 @@ export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
             </div>
             <div className="flex flex-col gap-10">
               <SelectOption
-                options={['وحشت/هیجانی', 'اکشن/ماجراجویی', 'درام/فانتزی']}
+                options={[
+                  'لطفا ژانر را انتخاب کنید',
+                  'وحشت/هیجانی',
+                  'اکشن/ماجراجویی',
+                  'درام/فانتزی',
+                ]}
                 value={genre}
                 onChange={setGenre}
                 label={'ژانر فیلم'}
@@ -95,10 +76,11 @@ export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
               />
               <div className="flex gap-3 w-full justify-end">
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className="bg-yellow-400 py-1 px-7 text-black rounded-md border-none"
                 >
-                  ذخیره
+                  {!isEditing ? 'ذخیره' : 'ویرایش'}
                 </button>
                 <button
                   onClick={handleReset}
@@ -115,3 +97,29 @@ export const FilmForm = ({ handleSubmited, isSubmited }: any) => {
     </>
   );
 };
+
+// else {
+//   const formData = {
+//     name,
+//     director,
+//     genre,
+//     productionDate,
+//     description,
+//   };
+
+//   films
+//     .put(`/films/${filmId}`, formData) // Use filmId in the URL
+//     .then((response) => {
+//       console.log(response);
+//       console.log('Film successfully updated');
+//       handleSubmited(!isSubmited);
+//       setName('');
+//       setDirector('');
+//       setGenre('');
+//       setProductionDate('');
+//       setDescription('');
+//     })
+//     .catch((error) => {
+//       console.error('Failed to update film:', error);
+//     });
+// }

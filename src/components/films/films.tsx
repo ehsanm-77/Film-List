@@ -1,10 +1,12 @@
 import React from 'react';
 import { FilmsListProps } from '../../types/types';
 
-export const FilmsList: React.FC<FilmsListProps> = ({
+export const Films: React.FC<FilmsListProps> = ({
   filmList,
-  handleEdit,
   handleDelete,
+  handleEdit,
+  setIsEditing,
+  giveFilmId,
 }) => {
   return (
     <>
@@ -18,7 +20,11 @@ export const FilmsList: React.FC<FilmsListProps> = ({
           <div className="text-center">{film.description}</div>
           <div className="text-center">
             <button
-              onClick={() => handleEdit(film.id, { name: 'Updated Name' })}
+              onClick={() => {
+                handleEdit(film.id, film);
+                setIsEditing(true);
+                giveFilmId(film.id);
+              }}
               className="bg-green-500 py-1 px-7 text-white rounded-md border-none"
             >
               ویرایش

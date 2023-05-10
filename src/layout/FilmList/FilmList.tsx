@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { films } from '../../service/api/axios/axios';
-import { FilmsList } from '../../components/cart/cart';
+import { useEffect, useState } from 'react';
+import { films } from '../../library/axios/axios';
+import { Films } from '../../components/films/films';
 
-export const FilmList = ({ isSubmited }: any) => {
-  const [filmList, setFilmList] = useState([]);
+export const FilmList = ({
+  isSubmited,
+  setFilmList,
+  filmList,
+  setName,
+  setGenre,
+  setDescription,
+  setDirector,
+  setProductionDate,
+  setIsEditing,
+  giveFilmId,
+}: any) => {
   const fetchFilmsFromApi = () => {
     films
       .get('/films')
@@ -16,6 +26,7 @@ export const FilmList = ({ isSubmited }: any) => {
       });
   };
   console.log(filmList);
+
   useEffect(() => {
     fetchFilmsFromApi();
   }, [isSubmited]);
@@ -26,8 +37,8 @@ export const FilmList = ({ isSubmited }: any) => {
       .then((res) => {
         console.log(res);
         // Remove the deleted film from the film list
-        setFilmList((prevList) =>
-          prevList.filter((film) => film.id !== filmId)
+        setFilmList((prevList: any) =>
+          prevList.filter((film: any) => film.id !== filmId)
         );
       })
       .catch((error) => {
@@ -35,26 +46,18 @@ export const FilmList = ({ isSubmited }: any) => {
       });
   };
 
-  const handleEdit = (filmId: any, updatedData: any) => {
-    films
-      .put(`/films/${filmId}`, updatedData)
-      .then((res) => {
-        console.log(res);
-        // Update the film in the film list
-        setFilmList((prevList: any) =>
-          prevList.map((film: any) => {
-            if (film.id === filmId) {
-              return { ...film, ...updatedData };
-            }
-            return film;
-          })
-        );
-      })
-      .catch((error) => {
-        console.error('Failed to edit film:', error);
-      });
+  const handleEdit = (filmId: any) => {
+    // Find the film object with the matching ID
+    const film = filmList.find((film: any) => film.id === filmId);
+    if (film) {
+      // Populate the form inputs with the film data
+      setName(film.name);
+      setDirector(film.director);
+      setGenre(film.genre);
+      setProductionDate(film.productionDate);
+      setDescription(film.description);
+    }
   };
-
   return (
     <div className="bg-[#595959] h-full">
       <div className="flex items-center text-white p-7">
@@ -73,10 +76,12 @@ export const FilmList = ({ isSubmited }: any) => {
           <div className="text-center">حذف</div>
         </div>
         <div className="flex justify-center mt-3 h-[2px] bg-white"></div>
-        <FilmsList
+        <Films
           filmList={filmList}
-          handleEdit={handleEdit}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          setIsEditing={setIsEditing}
+          giveFilmId={giveFilmId}
         />
       </div>
     </div>

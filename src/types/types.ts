@@ -40,6 +40,8 @@ export interface Film {
 
 export interface FilmsListProps {
   filmList: Film[];
-  handleEdit: (filmId: string, updatedData: Partial<Film>) => void;
   handleDelete: (filmId: string) => void;
+  handleEdit: (filmId: string, films: any) => void;
+  giveFilmId: (filmId: string) => void;
+  setIsEditing: any;
 }
