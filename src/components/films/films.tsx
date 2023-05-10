@@ -8,6 +8,9 @@ export const Films: React.FC<FilmsListProps> = ({
   setIsEditing,
   giveFilmId,
 }) => {
+  // const handleModalDesc = () =>{
+
+  // }
   return (
     <>
       {filmList.map((film, index: any) => (
@@ -20,7 +23,12 @@ export const Films: React.FC<FilmsListProps> = ({
           <div className="text-center">{film.director}</div>
           <div className="text-center">{film.genre}</div>
           <div className="text-center">{film.productionDate}</div>
-          <div className="text-center">{film.description}</div>
+          <div className="text-center ">
+            <button className="border border-blue-400 md:py-1 md:px-2 rounded-md hover:bg-blue-400">
+              توضیحات
+            </button>
+          </div>
+
           <div className="text-center">
             <button
               onClick={() => {
@@ -28,7 +36,7 @@ export const Films: React.FC<FilmsListProps> = ({
                 setIsEditing(true);
                 giveFilmId(film.id);
               }}
-              className="bg-green-500 py-1 px-7 text-white rounded-md border-none"
+              className="border border-yellow-400 md:py-1 md:px-7 text-white rounded-md hover:bg-yellow-400"
             >
               ویرایش
             </button>
@@ -36,7 +44,7 @@ export const Films: React.FC<FilmsListProps> = ({
           <div className="text-center">
             <button
               onClick={() => handleDelete(film.id)}
-              className="bg-red-500 py-1 px-7 text-white rounded-md border-none"
+              className="md:py-1 md:px-7 text-white rounded-md border border-red-400 hover:bg-red-400"
             >
               حذف
             </button>

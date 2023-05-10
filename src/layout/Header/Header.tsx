@@ -17,7 +17,7 @@ export const Header = ({ setFilmList }: any) => {
         <TextField
           label={''}
           onChange={handleSearch}
-          placeholder={'سرچ کنید'}
+          placeholder={'جستجو ... '}
           className={
             'mb-5 border-search focus:border-blue-600 focus:outline-none'
           }
