@@ -11,7 +11,10 @@ export const Films: React.FC<FilmsListProps> = ({
   return (
     <>
       {filmList.map((film, index: any) => (
-        <div key={film.id} className="grid grid-cols-8 items-center text-white">
+        <div
+          key={film.id}
+          className="grid grid-cols-8 py-3 items-center text-white"
+        >
           <div className="text-center">{index + 1}</div>
           <div className="text-center">{film.name}</div>
           <div className="text-center">{film.director}</div>

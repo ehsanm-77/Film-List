@@ -1,7 +1,28 @@
-export const Header = () => {
+import { TextField } from '../../components';
+import { films } from '../../library/axios/axios';
+
+export const Header = ({ setFilmList }: any) => {
+  const handleSearch = (e: any) => {
+    console.log(e);
+    films.get(`/films?q=${e}`).then((res) => {
+      setFilmList(res.data);
+    });
+  };
   return (
     <>
-      <div className="h-[10%] bg-[#f6c90e]"></div>
+      <div className="bg-[#f6c90e] flex justify-between items-center px-5">
+        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:text-center ">
+          اپلیکیشن فیلم
+        </div>
+        <TextField
+          label={''}
+          onChange={handleSearch}
+          placeholder={'سرچ کنید'}
+          className={
+            'mb-5 border-search focus:border-blue-600 focus:outline-none'
+          }
+        />
+      </div>
     </>
   );
 };

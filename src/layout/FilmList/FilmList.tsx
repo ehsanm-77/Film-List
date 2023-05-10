@@ -58,12 +58,47 @@ export const FilmList = ({
       setDescription(film.description);
     }
   };
+  const handleFilter = (e: any) => {
+    console.log(e);
+    e.target.value === 'همه'
+      ? films.get(`/films`).then((res) => {
+          setFilmList(res.data);
+        })
+      : films.get(`/films?genre=${e.target.value}`).then((res) => {
+          setFilmList(res.data);
+        });
+  };
   return (
-    <div className="bg-[#595959] h-full">
-      <div className="flex items-center text-white p-7">
-        <div className="w-2 h-4 ml-2 bg-yellow-400 rounded-md"></div>
-        <h2>لیست فیلم</h2>
+    <div className="bg-[#595959] h-3/5">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center text-white p-7">
+          <div className="w-2 h-4 ml-2 bg-yellow-400 rounded-md"></div>
+          <h2>لیست فیلم</h2>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="text-white">فیلتر</div>
+          <select
+            className="bg-transparent border rounded-md ml-10 px-2 py-1 text-slate-400 outline-none"
+            name=""
+            id=""
+            onChange={handleFilter}
+          >
+            <option className="bg-[#595959]" value="همه">
+              همه
+            </option>
+            <option className="bg-[#595959]" value="وحشت/هیجانی">
+              وحشت/هیجانی
+            </option>
+            <option className="bg-[#595959]" value="اکشن/ماجراجویی">
+              اکشن/ماجراجویی
+            </option>
+            <option className="bg-[#595959]" value="درام/فانتزی">
+              درام/فانتزی
+            </option>
+          </select>
+        </div>
       </div>
+
       <div className="p-10">
         <div className="grid grid-cols-8 items-center text-white">
           <div className="text-center">ردیف</div>
@@ -76,13 +111,15 @@ export const FilmList = ({
           <div className="text-center">حذف</div>
         </div>
         <div className="flex justify-center mt-3 h-[2px] bg-white"></div>
-        <Films
-          filmList={filmList}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          setIsEditing={setIsEditing}
-          giveFilmId={giveFilmId}
-        />
+        <div className="h-[220px] overflow-y-scroll">
+          <Films
+            filmList={filmList}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            setIsEditing={setIsEditing}
+            giveFilmId={giveFilmId}
+          />
+        </div>
       </div>
     </div>
   );

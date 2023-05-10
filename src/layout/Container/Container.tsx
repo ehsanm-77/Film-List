@@ -77,7 +77,7 @@ export const Container = () => {
     }
   };
 
-  const handleEdit = (filmId: any, film: any) => {
+  const handleEdit = (film: any) => {
     setName(film.name);
     setDirector(film.director);
     setGenre(film.genre);
@@ -88,7 +88,7 @@ export const Container = () => {
   return (
     <>
       <div className="w-full h-full">
-        <Header />
+        <Header filmList={filmList} setFilmList={setFilmList} />
         <FilmForm
           handleSubmited={handleSubmited}
           isSubmited={isSubmited}
