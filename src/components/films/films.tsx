@@ -8,9 +8,9 @@ export const Films: React.FC<FilmsListProps> = ({
   setIsEditing,
   giveFilmId,
 }) => {
-  // const handleModalDesc = () =>{
-
-  // }
+  const handleModalDesc = (desc: any) => {
+    console.log(desc);
+  };
   return (
     <>
       {filmList.map((film, index: any) => (
@@ -24,7 +24,10 @@ export const Films: React.FC<FilmsListProps> = ({
           <div className="text-center">{film.genre}</div>
           <div className="text-center">{film.productionDate}</div>
           <div className="text-center ">
-            <button className="border border-blue-400 md:py-1 md:px-2 rounded-md hover:bg-blue-400">
+            <button
+              onClick={() => handleModalDesc(film.description)}
+              className="border border-blue-400 md:py-1 md:px-2 rounded-md hover:bg-blue-400"
+            >
               توضیحات
             </button>
           </div>

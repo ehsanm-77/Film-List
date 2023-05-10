@@ -1,6 +1,6 @@
 import { TextField } from '../../components';
 import { films } from '../../library/axios/axios';
-
+import { debounce } from 'lodash';
 export const Header = ({ setFilmList }: any) => {
   const handleSearch = (e: any) => {
     console.log(e);
@@ -16,7 +16,7 @@ export const Header = ({ setFilmList }: any) => {
         </div>
         <TextField
           label={''}
-          onChange={handleSearch}
+          onChange={debounce(handleSearch, 1000)}
           placeholder={'جستجو ... '}
           className={
             'mb-5 border-search focus:border-blue-600 focus:outline-none'
