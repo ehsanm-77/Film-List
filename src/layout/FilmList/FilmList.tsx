@@ -1,55 +1,49 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { films } from '../../library/axios/axios';
 import { Films } from '../../components/Films/films';
-import { toast } from 'react-toastify';
+import { filmContext } from '../../context/FilmProvider';
 
-export const FilmList = ({
-  isSubmited,
-  setFilmList,
-  filmList,
-  setName,
-  setGenre,
-  setDescription,
-  setDirector,
-  setProductionDate,
-  setIsEditing,
-  giveFilmId,
-}: any) => {
+export const FilmList = ({ handleGetData }: any) => {
+  const { state, dispatch } = useContext(filmContext);
+
   const fetchFilmsFromApi = () => {
     films
       .get('/films')
       .then((res) => {
-        console.log(res.data);
-        setFilmList(res.data);
+        // console.log(res.data);
+        dispatch({
+          type: 'UPDATE-FILM-LIST',
+          payload: res.data,
+        });
       })
       .catch((error) => {
         console.error('Failed to fetch films:', error);
       });
   };
-  console.log(filmList);
 
   useEffect(() => {
     fetchFilmsFromApi();
-  }, [isSubmited]);
+  }, [state.isSubmited]);
 
-  const handleEdit = (filmId: any) => {
-    const film = filmList.find((film: any) => film.id === filmId);
+  const handleEdit = (film: any) => {
     if (film) {
-      setName(film.name);
-      setDirector(film.director);
-      setGenre(film.genre);
-      setProductionDate(film.productionDate);
-      setDescription(film.description);
+      handleGetData(film);
     }
   };
   const handleFilter = (e: any) => {
     console.log(e);
     e.target.value === 'همه'
       ? films.get(`/films`).then((res) => {
-          setFilmList(res.data);
+          dispatch({
+            type: 'UPDATE-FILM-LIST',
+            payload: res.data,
+          });
         })
       : films.get(`/films?genre=${e.target.value}`).then((res) => {
-          setFilmList(res.data);
+          dispatch({
+            type: 'UPDATE-FILM-LIST',
+            payload: res.data,
+          });
         });
   };
   return (
@@ -96,13 +90,7 @@ export const FilmList = ({
         </div>
         <div className="flex justify-center mt-3 h-[2px] bg-white"></div>
         <div className="h-[240px] overflow-y-scroll">
-          <Films
-            filmList={filmList}
-            handleEdit={handleEdit}
-            setIsEditing={setIsEditing}
-            giveFilmId={giveFilmId}
-            setFilmList={setFilmList}
-          />
+          <Films handleEdit={handleEdit} />
         </div>
       </div>
     </div>

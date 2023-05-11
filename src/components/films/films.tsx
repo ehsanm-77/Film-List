@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FilmsListProps } from '../../types/types';
 import { ModalDesc } from '../Modal/DescModal/DescModal';
 import { films } from '../../library/axios/axios';
 import { toast } from 'react-toastify';
 import { ModalDelete } from '../Modal/DeleteModal/DeleteModal';
+import { filmContext } from '../../context/FilmProvider';
 
-export const Films: React.FC<FilmsListProps> = ({
-  filmList,
-  handleEdit,
-  setIsEditing,
-  giveFilmId,
-  setFilmList,
-}) => {
+export const Films: React.FC<FilmsListProps> = ({ handleEdit }) => {
   const [desc, setDesc] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
+  const { state, dispatch } = useContext(filmContext);
+  console.log(state);
   const handleModalDesc = (desc: any) => {
     setDesc(desc);
     setIsOpen(true);
@@ -32,9 +28,10 @@ export const Films: React.FC<FilmsListProps> = ({
       .delete(`/films/${deleteId}`)
       .then((res) => {
         console.log(res);
-        setFilmList((prevList: any) =>
-          prevList.filter((film: any) => film.id !== deleteId)
-        );
+        dispatch({
+          type: 'UPDATE-FILM-LIST',
+          payload: state.filmList.filter((film: any) => film.id !== deleteId),
+        });
         toast.success('حذف فیلم با موفقیت انجام شد');
       })
       .catch((error) => {
@@ -44,7 +41,7 @@ export const Films: React.FC<FilmsListProps> = ({
 
   return (
     <>
-      {filmList.map((film, index: any) => (
+      {state.filmList.map((film: any, index: any) => (
         <div
           key={film.id}
           className="grid grid-cols-8 py-3 items-center text-white"
@@ -68,9 +65,7 @@ export const Films: React.FC<FilmsListProps> = ({
           <div className="text-center text-xs md:text-xl">
             <button
               onClick={() => {
-                handleEdit(film.id, film);
-                setIsEditing(true);
-                giveFilmId(film.id);
+                handleEdit(film);
               }}
               className="border border-yellow-400 md:py-1 md:px-7 text-white rounded-md hover:bg-yellow-400"
             >

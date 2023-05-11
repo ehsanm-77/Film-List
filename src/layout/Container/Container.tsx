@@ -1,109 +1,70 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FilmForm, FilmList, Header } from '..';
 import { films } from '../../library/axios/axios';
 import { toast } from 'react-toastify';
+import { filmContext } from '../../context/FilmProvider';
 
 export const Container = () => {
-  const [isSubmited, setIsSubmited] = useState(false);
-  const [name, setName] = useState('');
-  const [director, setDirector] = useState('');
-  const [genre, setGenre] = useState('');
-  const [productionDate, setProductionDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [filmList, setFilmList] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [findId, setFindId] = useState(null);
-  console.log(setName);
-  const [formData, setFormData] = useState({
-    id: 1,
-    name: '',
-    genre: '',
-    director: '',
-    productionDate: '',
-    description: '',
-  });
+  const { state, dispatch } = useContext(filmContext);
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmited = (boolean: boolean) => {
-    setIsSubmited(boolean);
-  };
-
-  const giveFilmId = (filmId: any) => {
-    const filmid = filmList.find((film: any) => filmId === film.id);
-    setFindId(filmid.id);
-    console.log(filmid.id);
-    return filmid;
-  };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(genre);
+  const handleSubmit = () => {
     if (
-      !name ||
-      !director ||
-      genre === 'لطفا ژانر را انتخاب کنید' ||
-      !genre ||
-      !productionDate ||
-      !description
+      !state.name ||
+      !state.director ||
+      state.genre === 'لطفا ژانر را انتخاب کنید' ||
+      !state.genre ||
+      !state.productionDate ||
+      !state.description
     ) {
       toast.error('لطفا همه ی فیلد ها را پر کنید');
       return;
     }
-    if (!isEditing) {
+    if (!state.isEditing) {
       const formData = {
-        name,
-        director,
-        genre,
-        productionDate,
-        description,
+        name: state.name,
+        director: state.director,
+        genre: state.genre,
+        productionDate: state.productionDate,
+        description: state.description,
       };
       films
         .post('/films', formData)
         .then((response) => {
           console.log(response);
           console.log('Film successfully saved');
-          handleSubmited(!isSubmited);
-          setName('');
-          setDirector('');
-          setGenre('');
-          setProductionDate('');
-          setDescription('');
+          dispatch({
+            type: 'SUBMIT-FORM',
+            payload: !state.isSubmited,
+          });
           toast.success(` فیلم ${response.data.name} با موفقیت اضافه شد`);
         })
         .catch((error) => {
           console.error('Failed to save film:', error);
         });
-    } else if (isEditing) {
+    } else if (state.isEditing) {
       const formData = {
-        name,
-        director,
-        genre,
-        productionDate,
-        description,
+        name: state.name,
+        director: state.director,
+        genre: state.genre,
+        productionDate: state.productionDate,
+        description: state.description,
       };
 
       films
-        .put(`/films/${findId}`, formData) // Use filmId in the URL
+        .put(`/films/${state.findId}`, formData)
         .then((response) => {
           console.log(response);
           console.log('Film successfully updated');
-          handleSubmited(!isSubmited);
-          setName('');
-          setDirector('');
-          setGenre('');
-          setProductionDate('');
-          setDescription('');
-          setIsEditing(false);
+          dispatch({
+            type: 'SUBMIT-FORM',
+            payload: !state.isSubmited,
+          });
+          // setName('');
+          // setDirector('');
+          // setGenre('');
+          // setProductionDate('');
+          // setDescription('');
+          // setIsEditing(false);
           toast.success('ویرایش با موفقیت انجام شد');
         })
         .catch((error) => {
@@ -113,55 +74,30 @@ export const Container = () => {
   };
 
   const handleEdit = (film: any) => {
-    setName(film.name);
-    setDirector(film.director);
-    setGenre(film.genre);
-    setProductionDate(film.productionDate);
-    setDescription(film.description);
+    dispatch({
+      type: 'EDIT-FILM',
+      payload: {
+        id: film.id,
+        name: film.name,
+        genre: film.genre,
+        director: film.director,
+        productionDate: film.productionDate,
+        description: film.description,
+      },
+    });
+    // setName(film.name);
+    // setDirector(film.director);
+    // setGenre(film.genre);
+    // setProductionDate(film.productionDate);
+    // setDescription(film.description);
   };
 
   return (
     <>
       <div className="w-full h-full">
-        <Header filmList={filmList} setFilmList={setFilmList} />
-        <FilmForm
-          handleSubmited={handleSubmited}
-          isSubmited={isSubmited}
-          name={name}
-          setName={setName}
-          director={director}
-          setDirector={setDirector}
-          genre={genre}
-          setGenre={setGenre}
-          productionDate={productionDate}
-          setProductionDate={setProductionDate}
-          description={description}
-          setDescription={setDescription}
-          handleEdit={handleEdit}
-          setFilmList={setFilmList}
-          filmList={filmList}
-          isEditing={isEditing}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-        />
-        <FilmList
-          isSubmited={isSubmited}
-          name={name}
-          setName={setName}
-          director={director}
-          setDirector={setDirector}
-          genre={genre}
-          setGenre={setGenre}
-          productionDate={productionDate}
-          setProductionDate={setProductionDate}
-          description={description}
-          setDescription={setDescription}
-          setFilmList={setFilmList}
-          filmList={filmList}
-          handleEdit={handleEdit}
-          setIsEditing={setIsEditing}
-          giveFilmId={giveFilmId}
-        />
+        <Header />
+        <FilmForm handleEdit={handleEdit} handleSubmit={handleSubmit} />
+        <FilmList handleGetData={handleEdit} />
       </div>
     </>
   );

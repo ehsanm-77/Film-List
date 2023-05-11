@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 export type Iinput = {
   label: string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: () => void;
   placeholder: string;
   className: string;
 };
@@ -40,7 +40,7 @@ export interface Film {
 export interface FilmsListProps {
   filmList: Film[];
   handleDelete: (filmId: string) => void;
-  handleEdit: (filmId: string, films: any) => void;
+  handleEdit: (films: any) => void;
   giveFilmId: (filmId: string) => void;
   setIsEditing: any;
   setFilmList: (list: any) => void;
@@ -53,4 +53,9 @@ export type FilmInfo = {
   director: string;
   productionDate: string;
   description: string;
+};
+
+export type Context = {
+  state: any;
+  dispatch: React.Dispatch<any>;
 };

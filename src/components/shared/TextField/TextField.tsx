@@ -8,12 +8,6 @@ export const TextField = ({
   placeholder,
   className,
 }: Iinput) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(e.target.value);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center">
@@ -31,7 +25,7 @@ export const TextField = ({
         className={className}
         type="text"
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
       />
     </div>

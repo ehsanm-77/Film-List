@@ -1,12 +1,27 @@
+import { useContext } from 'react';
 import { TextField } from '../../components';
 import { films } from '../../library/axios/axios';
 import { debounce } from 'lodash';
-export const Header = ({ setFilmList }: any) => {
+import { filmContext } from '../../context/FilmProvider';
+
+export const Header = () => {
+  const { dispatch } = useContext(filmContext);
+
   const handleSearch = (e: any) => {
-    console.log(e);
-    films.get(`/films?q=${e}`).then((res) => {
-      setFilmList(res.data);
-    });
+    console.log(e.target.value);
+    e.target.value !== ''
+      ? films.get(`/films?q=${e.target.value}`).then((res) => {
+          dispatch({
+            type: 'UPDATE-FILM-LIST',
+            payload: res.data,
+          });
+        })
+      : films.get(`/films`).then((res) => {
+          dispatch({
+            type: 'UPDATE-FILM-LIST',
+            payload: res.data,
+          });
+        });
   };
   return (
     <>

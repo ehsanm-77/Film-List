@@ -1,27 +1,25 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { SelectOption, TextField } from '../../components';
+import { filmContext } from '../../context/FilmProvider';
 
-export const FilmForm = ({
-  name,
-  director,
-  genre,
-  productionDate,
-  description,
-  setName,
-  setDirector,
-  setGenre,
-  setProductionDate,
-  setDescription,
-  isEditing,
-  handleSubmit,
-  handleChange,
-}: any) => {
+export const FilmForm = ({ handleSubmit }: any) => {
+  const { state, dispatch } = useContext(filmContext);
+
+  const handleChange = ({ key, value }: any) => {
+    dispatch({
+      type: 'UPDATE-INPUT-VALUE',
+      payload: {
+        key: key,
+        value: value,
+      },
+    });
+  };
+
   const handleReset = () => {
-    setName('');
-    setDirector('');
-    setGenre('');
-    setProductionDate('');
-    setDescription('');
+    dispatch({
+      type: 'SUBMIT-FORM',
+      payload: state.isSubmited,
+    });
   };
 
   return (
@@ -29,7 +27,8 @@ export const FilmForm = ({
       <div className=" bg-[#515050]">
         <form
           action=""
-          onSubmit={() => {
+          onSubmit={(e) => {
+            e.preventDefault();
             handleSubmit();
           }}
         >
@@ -37,15 +36,19 @@ export const FilmForm = ({
             <div className="flex flex-col gap-10">
               <TextField
                 label={'نام فیلم'}
-                value={name}
-                onChange={setName}
+                value={state.name}
+                onChange={(e) => {
+                  handleChange({ key: 'name', value: e.target.value });
+                }}
                 placeholder={'نام فیلم را بنویسید'}
                 className={'p-1 rounded-md text-sm form-input'}
               />
               <TextField
                 label={'کارگران'}
-                value={director}
-                onChange={setDirector}
+                value={state.director}
+                onChange={(e) => {
+                  handleChange({ key: 'director', value: e.target.value });
+                }}
                 placeholder={'نام کارگردان را وارد کنید'}
                 className={'p-1 rounded-md text-sm form-input'}
               />
@@ -58,14 +61,21 @@ export const FilmForm = ({
                   'اکشن/ماجراجویی',
                   'درام/عاشقانه',
                 ]}
-                value={genre}
-                onChange={setGenre}
+                value={state.genre}
+                onChange={(e) => {
+                  handleChange({ key: 'genre', value: e.target.value });
+                }}
                 label={'ژانر فیلم'}
               />
               <TextField
                 label={'سال تولید'}
-                value={productionDate}
-                onChange={setProductionDate}
+                value={state.productionDate}
+                onChange={(e) => {
+                  handleChange({
+                    key: 'productionDate',
+                    value: e.target.value,
+                  });
+                }}
                 placeholder={'سال ساخت فیلم را وارد کنید'}
                 className={'rounded-md text-sm form-input'}
               />
@@ -73,18 +83,19 @@ export const FilmForm = ({
             <div className="col-span-2 flex flex-col justify-between h-full">
               <TextField
                 label={'توضیحات'}
-                value={description}
-                onChange={setDescription}
+                value={state.description}
+                onChange={(e) => {
+                  handleChange({ key: 'description', value: e.target.value });
+                }}
                 placeholder={'توضیحات درباره فیلم'}
                 className={'!pb-12 text-sm form-input'}
               />
               <div className="flex gap-3 w-full justify-center md:justify-end mt-4 md:mt-0">
                 <button
-                  onClick={handleSubmit}
                   type="submit"
                   className="bg-yellow-400 py-1 px-7 text-black rounded-md border-none"
                 >
-                  {!isEditing ? 'ذخیره' : 'ویرایش'}
+                  {!state.isEditing ? 'ذخیره' : 'ویرایش'}
                 </button>
                 <button
                   onClick={handleReset}

@@ -7,12 +7,6 @@ export const SelectOption: React.FC<SelectOptionProps> = ({
   onChange,
   label,
 }: SelectOptionProps) => {
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (onChange) {
-      onChange(e.target.value);
-    }
-  };
-
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -30,7 +24,7 @@ export const SelectOption: React.FC<SelectOptionProps> = ({
             padding: '5px',
           }}
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
         >
           {options.map((option) => (
             <option
