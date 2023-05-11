@@ -1,61 +1,65 @@
-import { Dispatch, SetStateAction } from 'react';
-
 // Inputs (with type)
-export type Iinput = {
-  label: string;
-  value: string;
-  onChange: () => void;
-  placeholder: string;
-  className: string;
+export type IInput = {
+  label: string; // Label for the input
+  value: string; // Current value of the input
+  onChange: () => void; // Event handler for input change
+  placeholder: string; // Placeholder text for the input
+  className: string; // CSS class name for styling
 };
+
 // Buttons
-export type Ibutton = {
-  label: string;
-  className: string;
-  onClick: () => void;
-  type: string;
+export type IButton = {
+  label: string; // Label for the button
+  className: string; // CSS class name for styling
+  onClick: () => void; // Event handler for button click
+  type: string; // Type attribute of the button
 };
+
 // Select Options (with interface)
 export interface SelectOptionProps {
-  options: string[];
-  value: string;
-  onChange: (value: string) => void;
-  label: string;
+  options: string[]; // List of options for the select element
+  value: string; // Selected value
+  onChange: (value: string) => void; // Event handler for option change
+  label: string; // Label for the select element
 }
 
-//..........//
-
-export type Isubmit = {
-  fetchFilmsFromApi: () => void;
+// Submit (with interface)
+export type ISubmit = {
+  fetchFilmsFromApi: () => void; // Function to fetch films from API
 };
+
+// Film interface
 export interface Film {
-  id: string;
-  name: string;
-  director: string;
-  genre: string;
-  productionDate: string;
-  description: string;
+  id: string; // ID of the film
+  name: string; // Name of the film
+  director: string; // Director of the film
+  genre: string; // Genre of the film
+  productionDate: string; // Production date of the film
+  description: string; // Description of the film
 }
 
+// FilmsListProps interface
 export interface FilmsListProps {
-  filmList: Film[];
-  handleDelete: (filmId: string) => void;
-  handleEdit: (films: any) => void;
-  giveFilmId: (filmId: string) => void;
-  setIsEditing: any;
-  setFilmList: (list: any) => void;
+  filmList: Film[]; // List of films
+  handleDelete: (filmId: string) => void; // Function to handle film deletion
+  handleEdit: (films: any) => void; // Function to handle film editing
+  giveFilmId: (filmId: string) => void; // Function to provide film ID
+  setIsEditing: any; // Setter function for editing flag
+  setFilmList: (list: any) => void; // Setter function for film list
 }
 
+// FilmInfo type
 export type FilmInfo = {
-  id: number;
-  name: string;
-  genre: string;
-  director: string;
-  productionDate: string;
-  description: string;
+  id: number; // ID of the film
+  name: string; // Name of the film
+  genre: string; // Genre of the film
+  director: string; // Director of the film
+  productionDate: string; // Production date of the film
+  description: string; // Description of the film
 };
 
+// Context type
 export type Context = {
-  state: any;
-  dispatch: React.Dispatch<any>;
+  state: any; // State object
+  dispatch: React.Dispatch<any>; // Dispatch function
 };

@@ -6,9 +6,12 @@ import { FilmProvider } from './context/FilmProvider';
 function App() {
   return (
     <>
+      {/* Wrap the app with FilmProvider to provide film context */}
       <FilmProvider>
-        <Container />
+        <Container /> {/* Render the main container component */}
       </FilmProvider>
+
+      {/* ToastContainer for displaying toast notifications */}
       <ToastContainer
         position="top-right"
         autoClose={4000}

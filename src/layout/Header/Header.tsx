@@ -4,9 +4,11 @@ import { films } from '../../library/axios/axios';
 import { debounce } from 'lodash';
 import { filmContext } from '../../context/FilmProvider';
 
+// Header component
 export const Header = () => {
   const { dispatch } = useContext(filmContext);
 
+  // Handle search input changes
   const handleSearch = (e: any) => {
     console.log(e.target.value);
     e.target.value !== ''
@@ -23,12 +25,16 @@ export const Header = () => {
           });
         });
   };
+
   return (
     <>
       <div className="bg-[#f6c90e] flex justify-between items-center px-5">
-        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:mr-28 md:text-center ">
+        {/* Application title */}
+        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:mr-28 md:text-center">
           اپلیکیشن فیلم
         </div>
+
+        {/* Search input field */}
         <TextField
           label={''}
           onChange={debounce(handleSearch, 1000)}

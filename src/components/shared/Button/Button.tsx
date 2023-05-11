@@ -1,5 +1,6 @@
-import { Ibutton } from '../../../types/types';
+import { IButton } from '../../../types/types';
 
-export const Button = ({ label }: Ibutton) => {
+// Button component
+export const Button = ({ label }: IButton) => {
   return <button>{label}</button>;
 };

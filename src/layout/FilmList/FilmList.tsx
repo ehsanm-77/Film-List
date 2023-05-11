@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { films } from '../../library/axios/axios';
 import { Films } from '../../components/Films/films';
 import { filmContext } from '../../context/FilmProvider';
@@ -6,11 +6,11 @@ import { filmContext } from '../../context/FilmProvider';
 export const FilmList = ({ handleGetData }: any) => {
   const { state, dispatch } = useContext(filmContext);
 
+  // Fetch films from the API
   const fetchFilmsFromApi = () => {
     films
       .get('/films')
       .then((res) => {
-        // console.log(res.data);
         dispatch({
           type: 'UPDATE-FILM-LIST',
           payload: res.data,
@@ -23,14 +23,16 @@ export const FilmList = ({ handleGetData }: any) => {
 
   useEffect(() => {
     fetchFilmsFromApi();
-  }, [state.isSubmited]);
+  }, [state.isSubmited]); // Fetch films when isSubmitted changes
 
   const handleEdit = (film: any) => {
     if (film) {
       handleGetData(film);
     }
   };
+
   const handleFilter = (e: any) => {
+    // Handle genre filtering
     console.log(e);
     e.target.value === 'همه'
       ? films.get(`/films`).then((res) => {
@@ -46,6 +48,7 @@ export const FilmList = ({ handleGetData }: any) => {
           });
         });
   };
+
   return (
     <div className="bg-[#595959] h-[443px]">
       <div className="flex items-center justify-between">

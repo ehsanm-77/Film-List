@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import { SelectOption, TextField } from '../../components';
 import { filmContext } from '../../context/FilmProvider';
 
+// FilmForm component
 export const FilmForm = ({ handleSubmit }: any) => {
   const { state, dispatch } = useContext(filmContext);
 
+  // Handle input value changes
   const handleChange = ({ key, value }: any) => {
     dispatch({
       type: 'UPDATE-INPUT-VALUE',
@@ -15,6 +17,7 @@ export const FilmForm = ({ handleSubmit }: any) => {
     });
   };
 
+  // Handle form reset
   const handleReset = () => {
     dispatch({
       type: 'SUBMIT-FORM',
@@ -24,7 +27,7 @@ export const FilmForm = ({ handleSubmit }: any) => {
 
   return (
     <>
-      <div className=" bg-[#515050]">
+      <div className="bg-[#515050]">
         <form
           action=""
           onSubmit={(e) => {
@@ -34,6 +37,7 @@ export const FilmForm = ({ handleSubmit }: any) => {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 p-10 gap-12">
             <div className="flex flex-col gap-10">
+              {/* Text field for film name */}
               <TextField
                 label={'نام فیلم'}
                 value={state.name}
@@ -43,6 +47,8 @@ export const FilmForm = ({ handleSubmit }: any) => {
                 placeholder={'نام فیلم را بنویسید'}
                 className={'p-1 rounded-md text-sm form-input'}
               />
+
+              {/* Text field for director */}
               <TextField
                 label={'کارگران'}
                 value={state.director}
@@ -53,7 +59,9 @@ export const FilmForm = ({ handleSubmit }: any) => {
                 className={'p-1 rounded-md text-sm form-input'}
               />
             </div>
+
             <div className="flex flex-col gap-10">
+              {/* Select option for film genre */}
               <SelectOption
                 options={[
                   'لطفا ژانر را انتخاب کنید',
@@ -67,6 +75,8 @@ export const FilmForm = ({ handleSubmit }: any) => {
                 }}
                 label={'ژانر فیلم'}
               />
+
+              {/* Text field for production date */}
               <TextField
                 label={'سال تولید'}
                 value={state.productionDate}
@@ -80,7 +90,9 @@ export const FilmForm = ({ handleSubmit }: any) => {
                 className={'rounded-md text-sm form-input'}
               />
             </div>
+
             <div className="col-span-2 flex flex-col justify-between h-full">
+              {/* Text field for film description */}
               <TextField
                 label={'توضیحات'}
                 value={state.description}

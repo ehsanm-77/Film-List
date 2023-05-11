@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FilmForm, FilmList, Header } from '..';
 import { films } from '../../library/axios/axios';
 import { toast } from 'react-toastify';
@@ -8,6 +8,7 @@ export const Container = () => {
   const { state, dispatch } = useContext(filmContext);
 
   const handleSubmit = () => {
+    // Validate form fields
     if (
       !state.name ||
       !state.director ||
@@ -19,7 +20,9 @@ export const Container = () => {
       toast.error('لطفا همه ی فیلد ها را پر کنید');
       return;
     }
+
     if (!state.isEditing) {
+      // Create a new film
       const formData = {
         name: state.name,
         director: state.director,
@@ -27,6 +30,7 @@ export const Container = () => {
         productionDate: state.productionDate,
         description: state.description,
       };
+
       films
         .post('/films', formData)
         .then((response) => {
@@ -42,6 +46,7 @@ export const Container = () => {
           console.error('Failed to save film:', error);
         });
     } else if (state.isEditing) {
+      // Update an existing film
       const formData = {
         name: state.name,
         director: state.director,
@@ -59,12 +64,6 @@ export const Container = () => {
             type: 'SUBMIT-FORM',
             payload: !state.isSubmited,
           });
-          // setName('');
-          // setDirector('');
-          // setGenre('');
-          // setProductionDate('');
-          // setDescription('');
-          // setIsEditing(false);
           toast.success('ویرایش با موفقیت انجام شد');
         })
         .catch((error) => {
@@ -74,6 +73,7 @@ export const Container = () => {
   };
 
   const handleEdit = (film: any) => {
+    // Set the selected film for editing
     dispatch({
       type: 'EDIT-FILM',
       payload: {
@@ -85,19 +85,16 @@ export const Container = () => {
         description: film.description,
       },
     });
-    // setName(film.name);
-    // setDirector(film.director);
-    // setGenre(film.genre);
-    // setProductionDate(film.productionDate);
-    // setDescription(film.description);
   };
 
   return (
     <>
       <div className="w-full h-full">
-        <Header />
-        <FilmForm handleEdit={handleEdit} handleSubmit={handleSubmit} />
-        <FilmList handleGetData={handleEdit} />
+        <Header /> {/* Render the header component */}
+        <FilmForm handleEdit={handleEdit} handleSubmit={handleSubmit} />{' '}
+        {/* Render the film form component */}
+        <FilmList handleGetData={handleEdit} />{' '}
+        {/* Render the film list component */}
       </div>
     </>
   );
