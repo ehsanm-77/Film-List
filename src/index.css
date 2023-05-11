@@ -40,3 +40,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.form-input:focus {
+  background-color: #59564d !important;
+  border: 2px solid #ccaa1e !important;
+  outline: none !important;
+}

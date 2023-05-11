@@ -33,7 +33,11 @@ export const SelectOption: React.FC<SelectOptionProps> = ({
           onChange={handleChange}
         >
           {options.map((option) => (
-            <option className="bg-[#515050]" key={option} value={option}>
+            <option
+              className="bg-[#515050] option-form"
+              key={option}
+              value={option}
+            >
               {option}
             </option>
           ))}

@@ -14,7 +14,6 @@ export type Ibutton = {
   className: string;
   onClick: () => void;
   type: string;
-  // handleSubmit: () => void;
 };
 // Select Options (with interface)
 export interface SelectOptionProps {
@@ -46,3 +45,12 @@ export interface FilmsListProps {
   setIsEditing: any;
   setFilmList: (list: any) => void;
 }
+
+export type FilmInfo = {
+  id: number;
+  name: string;
+  genre: string;
+  director: string;
+  productionDate: string;
+  description: string;
+};

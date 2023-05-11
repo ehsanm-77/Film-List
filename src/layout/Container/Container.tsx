@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FilmForm, FilmList, Header } from '..';
 import { films } from '../../library/axios/axios';
 import { toast } from 'react-toastify';
@@ -13,6 +13,28 @@ export const Container = () => {
   const [filmList, setFilmList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [findId, setFindId] = useState(null);
+  console.log(setName);
+  const [formData, setFormData] = useState({
+    id: 1,
+    name: '',
+    genre: '',
+    director: '',
+    productionDate: '',
+    description: '',
+  });
+
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmited = (boolean: boolean) => {
     setIsSubmited(boolean);
   };
@@ -25,8 +47,19 @@ export const Container = () => {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(genre);
+    if (
+      !name ||
+      !director ||
+      genre === 'لطفا ژانر را انتخاب کنید' ||
+      !genre ||
+      !productionDate ||
+      !description
+    ) {
+      toast.error('لطفا همه ی فیلد ها را پر کنید');
+      return;
+    }
     if (!isEditing) {
-      // Create an object with the form data
       const formData = {
         name,
         director,
@@ -71,7 +104,7 @@ export const Container = () => {
           setProductionDate('');
           setDescription('');
           setIsEditing(false);
-          toast.info('ویرایش با موفقیت انجام شد');
+          toast.success('ویرایش با موفقیت انجام شد');
         })
         .catch((error) => {
           console.error('Failed to update film:', error);
@@ -109,6 +142,7 @@ export const Container = () => {
           filmList={filmList}
           isEditing={isEditing}
           handleSubmit={handleSubmit}
+          handleChange={handleChange}
         />
         <FilmList
           isSubmited={isSubmited}

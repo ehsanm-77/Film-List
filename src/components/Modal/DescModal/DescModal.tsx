@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 
 export const ModalDesc = ({ setIsOpen, isOpen, desc }: any) => {
@@ -14,7 +13,7 @@ export const ModalDesc = ({ setIsOpen, isOpen, desc }: any) => {
             'rounded-md bg-[#d9d9d9] h-1/2 md:m-40 m-16 w-full shadow-md'
           }
         >
-          <div className="flex justify-between py-5 px-20">
+          <div className="flex justify-between py-5 px-10">
             <Dialog.Title className="mt-2">توضیحات</Dialog.Title>
             <button
               onClick={() => setIsOpen(false)}

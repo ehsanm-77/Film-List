@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { SelectOption, TextField } from '../../components';
+import { FilmInfo } from '../../types/types';
 
 export const FilmForm = ({
   name,
@@ -13,9 +15,8 @@ export const FilmForm = ({
   setDescription,
   isEditing,
   handleSubmit,
+  handleChange,
 }: any) => {
-  // State variables for form inputs
-
   const handleReset = () => {
     setName('');
     setDirector('');
@@ -40,14 +41,14 @@ export const FilmForm = ({
                 value={name}
                 onChange={setName}
                 placeholder={'نام فیلم را بنویسید'}
-                className={'p-1 rounded-md text-sm'}
+                className={'p-1 rounded-md text-sm form-input'}
               />
               <TextField
                 label={'کارگران'}
                 value={director}
                 onChange={setDirector}
                 placeholder={'نام کارگردان را وارد کنید'}
-                className={'p-1 rounded-md text-sm'}
+                className={'p-1 rounded-md text-sm form-input'}
               />
             </div>
             <div className="flex flex-col gap-10">
@@ -67,7 +68,7 @@ export const FilmForm = ({
                 value={productionDate}
                 onChange={setProductionDate}
                 placeholder={'سال ساخت فیلم را وارد کنید'}
-                className={'rounded-md text-sm focus:bg-red-400'}
+                className={'rounded-md text-sm form-input'}
               />
             </div>
             <div className="col-span-2 flex flex-col justify-between h-full">
@@ -76,7 +77,7 @@ export const FilmForm = ({
                 value={description}
                 onChange={setDescription}
                 placeholder={'توضیحات درباره فیلم'}
-                className={'!pb-12 text-sm'}
+                className={'!pb-12 text-sm form-input'}
               />
               <div className="flex gap-3 w-full justify-end">
                 <button

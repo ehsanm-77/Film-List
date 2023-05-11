@@ -60,7 +60,7 @@ export const FilmList = ({
           <h2>لیست فیلم</h2>
         </div>
         <div className="flex items-center gap-3">
-          <div className="text-white">فیلتر</div>
+          <div className="text-white">فیلتر :</div>
           <select
             className="bg-transparent border rounded-md ml-10 px-2 py-1 text-slate-400 outline-none"
             name=""
@@ -85,14 +85,14 @@ export const FilmList = ({
 
       <div className="md:p-10 text-sm md:text-lg">
         <div className="grid grid-cols-8 items-center text-white">
-          <div className="text-center">ردیف</div>
-          <div className="text-center">نام فیلم</div>
-          <div className="text-center">کارگردان</div>
-          <div className="text-center">ژانر فیلم</div>
-          <div className="text-center">سال ساخت</div>
-          <div className="text-center">توضیحات</div>
-          <div className="text-center">ویرایش</div>
-          <div className="text-center">حذف</div>
+          <div className="text-center text-xs md:text-xl">ردیف</div>
+          <div className="text-center text-xs md:text-xl">نام فیلم</div>
+          <div className="text-center text-xs md:text-xl">کارگردان</div>
+          <div className="text-center text-xs md:text-xl">ژانر فیلم</div>
+          <div className="text-center text-xs md:text-xl">سال ساخت</div>
+          <div className="text-center text-xs md:text-xl">توضیحات</div>
+          <div className="text-center text-xs md:text-xl">ویرایش</div>
+          <div className="text-center text-xs md:text-xl">حذف</div>
         </div>
         <div className="flex justify-center mt-3 h-[2px] bg-white"></div>
         <div className="h-[240px] overflow-y-scroll">
