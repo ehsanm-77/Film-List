@@ -1,4 +1,3 @@
-import { films } from '../../library/axios/axios';
 import { SelectOption, TextField } from '../../components';
 
 export const FilmForm = ({
@@ -28,7 +27,12 @@ export const FilmForm = ({
   return (
     <>
       <div className=" bg-[#515050]">
-        <form action="" onSubmit={handleSubmit}>
+        <form
+          action=""
+          onSubmit={() => {
+            handleSubmit();
+          }}
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 p-10 gap-12">
             <div className="flex flex-col gap-10">
               <TextField
@@ -97,29 +101,3 @@ export const FilmForm = ({
     </>
   );
 };
-
-// else {
-//   const formData = {
-//     name,
-//     director,
-//     genre,
-//     productionDate,
-//     description,
-//   };
-
-//   films
-//     .put(`/films/${filmId}`, formData) // Use filmId in the URL
-//     .then((response) => {
-//       console.log(response);
-//       console.log('Film successfully updated');
-//       handleSubmited(!isSubmited);
-//       setName('');
-//       setDirector('');
-//       setGenre('');
-//       setProductionDate('');
-//       setDescription('');
-//     })
-//     .catch((error) => {
-//       console.error('Failed to update film:', error);
-//     });
-// }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FilmForm, FilmList, Header } from '..';
 import { films } from '../../library/axios/axios';
+import { toast } from 'react-toastify';
 
 export const Container = () => {
   const [isSubmited, setIsSubmited] = useState(false);
@@ -33,7 +34,6 @@ export const Container = () => {
         productionDate,
         description,
       };
-
       films
         .post('/films', formData)
         .then((response) => {
@@ -45,6 +45,7 @@ export const Container = () => {
           setGenre('');
           setProductionDate('');
           setDescription('');
+          toast.success('افزودن کاربر با موفقیت انجام شد');
         })
         .catch((error) => {
           console.error('Failed to save film:', error);
@@ -70,6 +71,7 @@ export const Container = () => {
           setProductionDate('');
           setDescription('');
           setIsEditing(false);
+          toast.info('ویرایش با موفقیت انجام شد');
         })
         .catch((error) => {
           console.error('Failed to update film:', error);

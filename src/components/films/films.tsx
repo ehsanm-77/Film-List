@@ -10,7 +10,7 @@ export const Films: React.FC<FilmsListProps> = ({
   giveFilmId,
 }) => {
   const [desc, setDesc] = useState(null);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const handleModalDesc = (desc: any) => {
     setDesc(desc);
     setIsOpen(true);
