@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { films } from '../../library/axios/axios';
-import { Films } from '../../components/films/films';
+import { Films } from '../../components/Films/films';
 
 export const FilmList = ({
   isSubmited,

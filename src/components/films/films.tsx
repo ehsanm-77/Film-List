@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FilmsListProps } from '../../types/types';
+import { ModalDesc } from '../Modal/DescModal/DescModal';
 
 export const Films: React.FC<FilmsListProps> = ({
   filmList,
@@ -8,8 +9,11 @@ export const Films: React.FC<FilmsListProps> = ({
   setIsEditing,
   giveFilmId,
 }) => {
+  const [desc, setDesc] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
   const handleModalDesc = (desc: any) => {
-    console.log(desc);
+    setDesc(desc);
+    setIsOpen(true);
   };
   return (
     <>
@@ -54,6 +58,7 @@ export const Films: React.FC<FilmsListProps> = ({
           </div>
         </div>
       ))}
+      <ModalDesc setIsOpen={setIsOpen} isOpen={isOpen} desc={desc} />
     </>
   );
 };
