@@ -1,76 +1,12 @@
 {
   "films": [
     {
-      "name": "qqqq",
-      "director": "ww",
-      "genre": "وحشت/هیجانی",
-      "productionDate": "ww",
-      "description": "qqqq",
-      "id": 1
-    },
-    {
-      "name": "111",
-      "director": "111111",
-      "genre": "اکشن/ماجراجویی",
-      "productionDate": "222222",
-      "description": "111111",
-      "id": 2
-    },
-    {
-      "name": "mmmm",
-      "director": "mmmm",
-      "genre": "درام/فانتزی",
-      "productionDate": "mmmm",
-      "description": "mmmmm",
-      "id": 3
-    },
-    {
-      "name": "احسام",
-      "director": "محمدی",
-      "genre": "اکشن/ماجراجویی",
-      "productionDate": "1998",
-      "description": "فیلمی زیبا",
-      "id": 4
-    },
-    {
       "name": "مانی هیست",
       "director": "احسان",
-      "genre": "وحشت/هیجانی",
+      "genre": "اکشن/ماجراجویی",
       "productionDate": "2023",
       "description": "خوب",
       "id": 5
-    },
-    {
-      "name": ";;;",
-      "director": ";;;;;;",
-      "genre": "درام/فانتزی",
-      "productionDate": ";;;;;;",
-      "description": ";;;;;;;",
-      "id": 7
-    },
-    {
-      "name": "",
-      "director": "",
-      "genre": "",
-      "productionDate": "",
-      "description": "",
-      "id": 8
-    },
-    {
-      "name": "",
-      "director": "",
-      "genre": "",
-      "productionDate": "",
-      "description": "",
-      "id": 9
-    },
-    {
-      "name": "",
-      "director": "",
-      "genre": "",
-      "productionDate": "",
-      "description": "",
-      "id": 10
     }
   ]
 }

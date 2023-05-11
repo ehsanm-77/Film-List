@@ -11,16 +11,14 @@ export const Header = ({ setFilmList }: any) => {
   return (
     <>
       <div className="bg-[#f6c90e] flex justify-between items-center px-5">
-        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:text-center ">
+        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:mr-28 md:text-center ">
           اپلیکیشن فیلم
         </div>
         <TextField
           label={''}
           onChange={debounce(handleSearch, 1000)}
           placeholder={'جستجو ... '}
-          className={
-            'mb-5 border-search focus:border-blue-600 focus:outline-none'
-          }
+          className={'mb-5 border-search md:ml-10'}
         />
       </div>
     </>

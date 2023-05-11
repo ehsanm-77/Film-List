@@ -1,20 +1,44 @@
 import React, { useState } from 'react';
 import { FilmsListProps } from '../../types/types';
 import { ModalDesc } from '../Modal/DescModal/DescModal';
+import { films } from '../../library/axios/axios';
+import { toast } from 'react-toastify';
+import { ModalDelete } from '../Modal/DeleteModal/DeleteModal';
 
 export const Films: React.FC<FilmsListProps> = ({
   filmList,
-  handleDelete,
   handleEdit,
   setIsEditing,
   giveFilmId,
+  setFilmList,
 }) => {
   const [desc, setDesc] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const handleModalDesc = (desc: any) => {
     setDesc(desc);
     setIsOpen(true);
   };
+  const handleModalDelete = (filmId: any) => {
+    setDeleteId(filmId);
+    setIsModalOpen(true);
+  };
+  const handleDelete = () => {
+    films
+      .delete(`/films/${deleteId}`)
+      .then((res) => {
+        console.log(res);
+        setFilmList((prevList: any) =>
+          prevList.filter((film: any) => film.id !== deleteId)
+        );
+        toast.info('حذف فیلم با موفقیت انجام شد');
+      })
+      .catch((error) => {
+        console.error('Failed to delete film:', error);
+      });
+  };
+
   return (
     <>
       {filmList.map((film, index: any) => (
@@ -50,7 +74,9 @@ export const Films: React.FC<FilmsListProps> = ({
           </div>
           <div className="text-center">
             <button
-              onClick={() => handleDelete(film.id)}
+              onClick={() => {
+                handleModalDelete(film.id);
+              }}
               className="md:py-1 md:px-7 text-white rounded-md border border-red-400 hover:bg-red-400"
             >
               حذف
@@ -59,6 +85,11 @@ export const Films: React.FC<FilmsListProps> = ({
         </div>
       ))}
       <ModalDesc setIsOpen={setIsOpen} isOpen={isOpen} desc={desc} />
+      <ModalDelete
+        handleDelete={handleDelete}
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+      />
     </>
   );
 };

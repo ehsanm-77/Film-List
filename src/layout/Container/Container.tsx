@@ -45,7 +45,7 @@ export const Container = () => {
           setGenre('');
           setProductionDate('');
           setDescription('');
-          toast.success('افزودن کاربر با موفقیت انجام شد');
+          toast.success(` فیلم ${response.data.name} با موفقیت اضافه شد`);
         })
         .catch((error) => {
           console.error('Failed to save film:', error);

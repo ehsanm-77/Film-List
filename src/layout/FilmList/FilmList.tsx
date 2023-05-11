@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { films } from '../../library/axios/axios';
 import { Films } from '../../components/Films/films';
+import { toast } from 'react-toastify';
 
 export const FilmList = ({
   isSubmited,
@@ -31,26 +32,9 @@ export const FilmList = ({
     fetchFilmsFromApi();
   }, [isSubmited]);
 
-  const handleDelete = (filmId: any) => {
-    films
-      .delete(`/films/${filmId}`)
-      .then((res) => {
-        console.log(res);
-        // Remove the deleted film from the film list
-        setFilmList((prevList: any) =>
-          prevList.filter((film: any) => film.id !== filmId)
-        );
-      })
-      .catch((error) => {
-        console.error('Failed to delete film:', error);
-      });
-  };
-
   const handleEdit = (filmId: any) => {
-    // Find the film object with the matching ID
     const film = filmList.find((film: any) => film.id === filmId);
     if (film) {
-      // Populate the form inputs with the film data
       setName(film.name);
       setDirector(film.director);
       setGenre(film.genre);
@@ -114,10 +98,10 @@ export const FilmList = ({
         <div className="h-[240px] overflow-y-scroll">
           <Films
             filmList={filmList}
-            handleDelete={handleDelete}
             handleEdit={handleEdit}
             setIsEditing={setIsEditing}
             giveFilmId={giveFilmId}
+            setFilmList={setFilmList}
           />
         </div>
       </div>

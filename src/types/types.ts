@@ -44,4 +44,5 @@ export interface FilmsListProps {
   handleEdit: (filmId: string, films: any) => void;
   giveFilmId: (filmId: string) => void;
   setIsEditing: any;
+  setFilmList: (list: any) => void;
 }
