@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { SelectOption, TextField } from '../../components';
-import { FilmInfo } from '../../types/types';
 
 export const FilmForm = ({
   name,
@@ -55,9 +54,9 @@ export const FilmForm = ({
               <SelectOption
                 options={[
                   'لطفا ژانر را انتخاب کنید',
-                  'وحشت/هیجانی',
+                  'معمایی/هیجانی',
                   'اکشن/ماجراجویی',
-                  'درام/فانتزی',
+                  'درام/عاشقانه',
                 ]}
                 value={genre}
                 onChange={setGenre}
@@ -79,7 +78,7 @@ export const FilmForm = ({
                 placeholder={'توضیحات درباره فیلم'}
                 className={'!pb-12 text-sm form-input'}
               />
-              <div className="flex gap-3 w-full justify-end">
+              <div className="flex gap-3 w-full justify-center md:justify-end mt-4 md:mt-0">
                 <button
                   onClick={handleSubmit}
                   type="submit"
