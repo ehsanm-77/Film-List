@@ -44,43 +44,47 @@ export const Films: React.FC<FilmsListProps> = ({ handleEdit }) => {
       {state.filmList.map((film: any, index: any) => (
         <div
           key={film.id}
-          className="grid grid-cols-8 py-3 items-center text-white"
+          className="grid grid-cols-6 md:grid-cols-8 py-3 items-center text-white "
         >
-          <div className="text-center text-xs md:text-xl">{index + 1}</div>
-          <div className="text-center text-xs md:text-xl">{film.name}</div>
-          <div className="text-center text-xs md:text-xl">{film.director}</div>
-          <div className="text-center text-xs md:text-xl">{film.genre}</div>
-          <div className="text-center text-xs md:text-xl">
+          <div className="text-center hidden md:block text-md md:text-xl">
+            {index + 1}
+          </div>
+          <div className="text-center text-md md:text-xl">{film.name}</div>
+          <div className="text-center text-md md:text-xl hidden md:block">
+            {film.director}
+          </div>
+          <div className="text-center text-md md:text-xl">{film.genre}</div>
+          <div className="text-center text-md md:text-xl">
             {film.productionDate}
           </div>
-          <div className="text-center text-xs md:text-xl">
-            <button
+          <div className="text-center text-md flex justify-center md:text-xl">
+            <img
+              src="../../../src/assets/img/description.svg"
+              alt=""
               onClick={() => handleModalDesc(film.description)}
-              className="border border-blue-400 md:py-1 md:px-2 rounded-md hover:bg-blue-400"
-            >
-              توضیحات
-            </button>
+              className="w-7"
+            />
           </div>
 
-          <div className="text-center text-xs md:text-xl">
-            <button
+          <div className="text-center text-xs md:text-xl flex justify-center">
+            <img
+              src="../../../src/assets/img/edit.svg"
+              alt=""
               onClick={() => {
                 handleEdit(film);
               }}
-              className="border border-yellow-400 md:py-1 md:px-7 text-white rounded-md hover:bg-yellow-400"
-            >
-              ویرایش
-            </button>
+              className="w-7"
+            />
           </div>
-          <div className="text-center">
-            <button
+          <div className="text-center flex justify-center">
+            <img
+              src="../../../src/assets/img/delete.svg"
+              alt=""
+              className="w-7"
               onClick={() => {
                 handleModalDelete(film.id);
               }}
-              className="md:py-1 md:px-7 text-white rounded-md border border-red-400 hover:bg-red-400"
-            >
-              حذف
-            </button>
+            />
           </div>
         </div>
       ))}

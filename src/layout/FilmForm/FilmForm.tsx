@@ -27,7 +27,7 @@ export const FilmForm = ({ handleSubmit }: any) => {
 
   return (
     <>
-      <div className="bg-[#515050]">
+      <div className="bg-[#515050] ">
         <form
           action=""
           onSubmit={(e) => {
@@ -45,7 +45,7 @@ export const FilmForm = ({ handleSubmit }: any) => {
                   handleChange({ key: 'name', value: e.target.value });
                 }}
                 placeholder={'نام فیلم را بنویسید'}
-                className={'p-1 rounded-md text-sm form-input'}
+                className={'p-1 rounded-md text-sm form-input !drop-shadow-md'}
               />
 
               {/* Text field for director */}
@@ -105,7 +105,7 @@ export const FilmForm = ({ handleSubmit }: any) => {
               <div className="flex gap-3 w-full justify-center md:justify-end mt-4 md:mt-0">
                 <button
                   type="submit"
-                  className="bg-yellow-400 py-1 px-7 text-black rounded-md border-none"
+                  className="bg-yellow-400 py-1 px-7 text-black rounded-md border-none drop-shadow-md"
                 >
                   {!state.isEditing ? 'ذخیره' : 'ویرایش'}
                 </button>

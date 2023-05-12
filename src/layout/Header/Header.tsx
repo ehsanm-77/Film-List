@@ -30,7 +30,7 @@ export const Header = () => {
     <>
       <div className="bg-[#f6c90e] flex justify-between items-center px-5">
         {/* Application title */}
-        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:mr-28 md:text-center">
+        <div className="w-full text-3xl font-bold text-sky-900 mr-auto md:mr-28 md:text-center drop-shadow-md">
           اپلیکیشن فیلم
         </div>
 
@@ -39,7 +39,7 @@ export const Header = () => {
           label={''}
           onChange={debounce(handleSearch, 1000)}
           placeholder={'جستجو ... '}
-          className={'mb-5 border-search md:ml-10'}
+          className={'mb-5 border-search md:ml-10 !drop-shadow-md'}
         />
       </div>
     </>

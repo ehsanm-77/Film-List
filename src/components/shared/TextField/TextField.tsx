@@ -11,9 +11,12 @@ export const TextField = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center">
-        <div className="w-2 h-4 ml-1 bg-yellow-400 rounded-md"></div>{' '}
+        <div className="w-2 h-4 ml-1 bg-yellow-400 rounded-md"></div>
         {/* Colored marker */}
-        <label style={{ color: 'white' }}>{label}</label> {/* Input label */}
+        <label className="!drop-shadow-md" style={{ color: 'white' }}>
+          {label}
+        </label>
+        {/* Input label */}
       </div>
       <input
         style={{
